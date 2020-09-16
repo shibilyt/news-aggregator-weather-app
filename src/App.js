@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { ThemeProvider } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import "./App.css";
+import Header from './components/Header'
+import NewsCard from "./components/NewsCard";
+import { Box } from "@material-ui/core";
+import Weather from "./components/Weather";
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider>
+        <Container maxWidth="md">
+          <Header/>
+          <Box mt={8} p={3}>
+            <NewsCard />
+          </Box>
+          <Weather/>
+        </Container>
+      </ThemeProvider>
     </div>
   );
 }
