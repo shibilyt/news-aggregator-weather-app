@@ -5,15 +5,18 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
+      appBar: {
+        background: theme.palette.dark.main
+      },
       toolbar: {
         display: 'flex',
-        justifyContent: "space-between"
+        justifyContent: "space-between",
       },
       linkSection : {
         
       }
-})
+}))
 
 const useNavStyles = makeStyles({
     link: {
@@ -35,7 +38,7 @@ export default function Header(){
     const classes = useStyles();
 
     return (
-        <AppBar>
+        <AppBar className={classes.appBar}>
           <Toolbar className={classes.toolbar}>
           <img
             src={logo}
