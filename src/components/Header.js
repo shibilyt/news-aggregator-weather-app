@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import logo from "../assets/logonews-logo.svg";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
-import { Typography } from "@material-ui/core";
+import Hidden from "@material-ui/core/Hidden";
 import Weather from "./Weather";
 import SearchInput from "./SearchInput";
 
@@ -17,38 +17,52 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
   },
+  logo: {
+    height: 25,
+    [theme.breakpoints.up("sm")]: {
+      height: 30,
+    },
+    [theme.breakpoints.up("md")]: {
+      height: 40,
+    },
+  },
   linkSection: {
     display: "flex",
     alignItems: "center",
   },
+  fab: {
+    position: "absolute",
+    bottom: 5,
+    right: 5,
+  },
 }));
 
-export default function Header({ setSearch }) {
+export default function Header({
+  setSearch,
+  weatherOpen,
+  handleWeatherOpen,
+  handleWeatherClose,
+}) {
   const classes = useStyles();
-
-  const [weatherOpen, setWeatherOpen] = useState(false);
-
-  function handleWeatherOpen() {
-    setWeatherOpen(true);
-  }
-
-  function handleWeatherClose() {
-    setWeatherOpen(false);
-  }
 
   return (
     <AppBar className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
-        <img src={logo} alt="The beautiful SNW log" />
+        <img src={logo} alt="The beautiful SNW log" className={classes.logo} />
         <SearchInput setSearch={setSearch} />
 
-        <Button variant="contained" color="primary" onClick={handleWeatherOpen}>
-          Current Weather
-        </Button>
+        <Hidden smDown>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleWeatherOpen}
+          >
+            Current Weather
+          </Button>
+        </Hidden>
 
         <Weather open={weatherOpen} handleClose={handleWeatherClose} />
       </Toolbar>
     </AppBar>
   );
 }
-

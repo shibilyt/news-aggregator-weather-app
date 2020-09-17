@@ -11,8 +11,8 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: 20,
   },
   newsTitle: {
-    textDecoration: 'none',
-    color: theme.palette.dark.main
+    textDecoration: "none",
+    color: theme.palette.dark.main,
   },
   publicationDetails: {
     display: "flex",
@@ -25,15 +25,23 @@ const useStyles = makeStyles((theme) => ({
   },
   body: {
     display: "flex",
-    justifyContent: 'space-between'
+    justifyContent: "space-between",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column-reverse",
+    },
   },
   content: {
-    marginRight: 10
+    marginRight: 10,
   },
   image: {
-    width: 120,
-    height: 120,
+    width: "100%",
+    height: 200,
+
     objectFit: "fill",
+    [theme.breakpoints.up("sm")]: {
+      width: "100%",
+      height: 300,
+    },
   },
 }));
 
@@ -43,11 +51,9 @@ export default function NewsCard({ data }) {
   return (
     <Card className={classes.card}>
       <header>
-      <a
-              className={classes.newsTitle}
-              href={data.source.url || data.url}
-            >
-        <Typography variant="h6">{data.title}</Typography></a>
+        <a className={classes.newsTitle} href={data.source.url || data.url}>
+          <Typography variant="h6">{data.title}</Typography>
+        </a>
         <div className={classes.publicationDetails}>
           <Typography variant="subtitle1">
             <a
@@ -63,7 +69,9 @@ export default function NewsCard({ data }) {
         </div>
       </header>
       <div className={classes.body}>
-        <Typography variant="body1" className={classes.content}>{data.description}</Typography>
+        <Typography variant="body1" className={classes.content}>
+          {data.description}
+        </Typography>
         <img
           src={data.image || data.urlToImage}
           alt="news topic"

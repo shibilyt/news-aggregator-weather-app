@@ -1,5 +1,5 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useEffect } from "react";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import Dialog from "@material-ui/core/Dialog";
@@ -8,8 +8,9 @@ import sunIcon from "../assets/sun-icon.svg";
 import useWeather from "../hooks/useWeather";
 import { usePosition } from "../hooks/usePosition";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles({
   paper: {
@@ -19,29 +20,31 @@ const useStyles = makeStyles({
     textAlign: "center",
     marginBottom: 20,
   },
-  closeButton:{
-      position: 'absolute',
-      top: 10,
-      right: 10
+  closeButton: {
+    position: "absolute",
+    top: 10,
+    right: 10,
   },
   weatherIcon: {
     width: 120,
   },
 });
 
-export default function Weather({ open , handleClose }) {
+export default function Weather({ open, handleClose }) {
   const classes = useStyles();
   const { latitude, longitude } = usePosition();
   const { status, data } = useWeather(latitude, longitude);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <Dialog open={open} classes={{ paper: classes.paper }}>
+    <Dialog fullScreen={fullScreen} open={open} classes={{ paper: classes.paper }}>
       <DialogTitle>
         <Typography variant="h6" className={classes.header}>
           Weather
         </Typography>
         <IconButton className={classes.closeButton} onClick={handleClose}>
-            <CloseIcon/>
+          <CloseIcon />
         </IconButton>
       </DialogTitle>
 
