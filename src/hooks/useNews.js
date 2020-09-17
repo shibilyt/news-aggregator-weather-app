@@ -1,6 +1,13 @@
 import {useQuery} from 'react-query';
 import axios from "axios";
 
+/*
+ API keys are taken from environment variables
+
+ language and search params are passed to hook.
+
+ based on the params passed, we call from either of the API
+*/
 export default function useNews(lang, search){                           
 
     function fetchNews(key, {lang, search}) {

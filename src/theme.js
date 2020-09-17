@@ -3,71 +3,73 @@ import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 // Setting up the App theme
 let theme = createMuiTheme({
   palette: {
-      common:{
-        black: '#333',
-        white:'#fafafa'
-      },
+    common: {
+      black: "#333",
+      white: "#fafafa",
+    },
     primary: {
       main: "#709C9F",
     },
     secondary: { main: "#BE396E" },
     dark: {
-        main: '#30343A',
+      main: "#30343A",
     },
     light: {
-        main: '#F7F6F0'
+      main: "#F7F6F0",
     },
   },
-  background: '#F7F6F0',
+  background: "#F7F6F0",
 
   typography: {
-    fontFamily: 'Merriweather, Montserrat',
+    fontFamily: "Merriweather, Montserrat",
     fontSize: 20,
     body1: {
-        fontSize: 20,
-        fontFamily: 'Montserrat',
-        lineHeight: 1.65,
+      fontSize: 20,
+      fontFamily: "Montserrat",
+      lineHeight: 1.65,
     },
     h1: {
-        fontFamily: 'Merriweather',
+      fontFamily: "Merriweather",
     },
     h2: {
-        fontFamily: 'Merriweather',
+      fontFamily: "Merriweather",
     },
     h3: {
-        fontFamily: 'Merriweather',
+      fontFamily: "Merriweather",
     },
     h4: {
-        fontFamily: 'Merriweather',
+      fontFamily: "Merriweather",
     },
     h5: {
-        fontFamily: 'Merriweather',
+      fontFamily: "Merriweather",
     },
     h6: {
-        fontFamily: 'Merriweather',
+      fontFamily: "Merriweather",
     },
     subtitle1: {
-        fontSize: 16,
-        fontFamily: 'Merriweather',
+      fontSize: 16,
+      fontFamily: "Merriweather",
     },
     subtitle2: {
-        fontSize: 16,
-        fontFamily: 'Montserrat',
+      fontSize: 16,
+      fontFamily: "Montserrat",
     },
     button: {
-        fontFamily: 'Montserrat'
-    }
+      fontFamily: "Montserrat",
+    },
+  },
+  overrides: {
+    MuiCssBaseline: {
+      "@global": {
+        a: {
+          color: "#30343A",
+          textDecoration: 'none'
+        },
+      },
+    },
   },
 });
 
-let darkTheme = createMuiTheme({
-    palette:{
-        type: 'dark'
-    }
-})
-
 theme = responsiveFontSizes(theme);
-darkTheme = responsiveFontSizes(darkTheme);
 
-export {darkTheme};
 export default theme;

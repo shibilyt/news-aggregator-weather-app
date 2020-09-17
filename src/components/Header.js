@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import logo from "../assets/logonews-logo.svg";
 import { makeStyles } from "@material-ui/core/styles";
@@ -51,6 +51,7 @@ export default function Header({
         <img src={logo} alt="The beautiful SNW log" className={classes.logo} />
         <SearchInput setSearch={setSearch} />
 
+        {/* Hides weather button for small screens */}
         <Hidden smDown>
           <Button
             variant="contained"
@@ -59,9 +60,8 @@ export default function Header({
           >
             Weather
           </Button>
+          <Weather open={weatherOpen} handleClose={handleWeatherClose} />
         </Hidden>
-
-        <Weather open={weatherOpen} handleClose={handleWeatherClose} />
       </Toolbar>
     </AppBar>
   );

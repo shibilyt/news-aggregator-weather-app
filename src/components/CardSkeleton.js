@@ -2,12 +2,12 @@ import React from "react";
 import Card from "@material-ui/core/Card";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
+import Typography  from "@material-ui/core/Typography";
 
-const useLoadingStyles = makeStyles({
+const useLoadingStyles = makeStyles((theme) => ({
   card: {
     padding: 20,
-    marginBottom: 20
+    marginBottom: 20,
   },
   publishingDetails: {
     display: "flex",
@@ -17,13 +17,17 @@ const useLoadingStyles = makeStyles({
   contentContainer: {
     display: "flex",
     justifyContent: "space-between",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column-reverse",
+    },
   },
   content: {
     width: "100%",
     marginRight: 15,
   },
-});
+}));
 
+// This will display a loading skeleton for the News Card
 export default function CardSkeleton() {
   const classes = useLoadingStyles();
   return (

@@ -35,6 +35,7 @@ export default function Content({
   handleWeatherClose,
 }) {
   const [lang, setLang] = useState("all");
+  // custom hook on top of useQuery to fetch news
   const { status, data, error } = useNews(lang, search);
 
   const classes = useStyles();
@@ -46,6 +47,7 @@ export default function Content({
         search={search}
         setSearch={setSearch}
       />
+      {/* When query is loading show loading skeletons */}
       {status === "loading" && (
         <>
           <CardSkeleton />
@@ -70,5 +72,5 @@ export default function Content({
 }
 
 function NewsError({ error }) {
-  return <div>Something went wrong. Retrying...</div>;
+  return <div>Something went wrong. </div>;
 }

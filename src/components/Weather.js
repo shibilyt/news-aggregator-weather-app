@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
@@ -43,6 +43,8 @@ const useStyles = makeStyles({
 
 export default function Weather({ open, handleClose }) {
   const classes = useStyles();
+
+  // custom hook to use the native geolocation API
   const { latitude, longitude } = usePosition();
 
   // custom hook on top of useQuery to handle weather API call when location allowed

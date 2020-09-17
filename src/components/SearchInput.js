@@ -48,9 +48,12 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchInput({ setSearch }) {
   const classes = useStyles();
 
+  // local state to handle input change
   const [query, setQuery] = useState("");
+
+  // set the App search state using setSearch method passed down on pressing enter
   function handleSearchEnter(e) {
-    if (e.keyCode == 13) {
+    if (e.keyCode === 13) {
       setSearch(query);
       setQuery("");
     }
