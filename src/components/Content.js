@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
 import Filter from "./Filter";
 import useNews from "../hooks/useNews";
 import NewsCard from "./NewsCard";
@@ -35,6 +36,7 @@ export default function Content({
   handleWeatherClose,
 }) {
   const [lang, setLang] = useState("all");
+
   // custom hook on top of useQuery to fetch news
   const { status, data, error } = useNews(lang, search);
 
@@ -57,20 +59,39 @@ export default function Content({
       )}
       {status === "error" && <NewsError error={error} />}
       {status === "success" &&
-        (lang === "all" && !search
-          ? data.data.articles.map((article) => <NewsCard data={article} />)
-          : data.data.articles.map((article) => <NewsCard data={article} />))}
-           {/* :  data.articles.map((article) => <NewsCard data={article} />))} */}
+        (lang === "all" && !search ? (
+          <Box>
+            <Typography>Displaying Top Headlines</Typography>
+            {data.data.articles.map((article) => (
+              <NewsCard data={article} />
+            ))}
+          </Box>
+        ) : (
+          // : data.data.articles.map((article) => <NewsCard data={article} />))}
+          data.articles.map((article) => <NewsCard data={article} />)
+        ))}
       <Hidden mdUp>
-        <Fab aria-label={"weather"} className={classes.fab} onClick={handleWeatherOpen}>
+        <Fab
+          aria-label={"weather"}
+          className={classes.fab}
+          onClick={handleWeatherOpen}
+        >
           <SunIcon className={classes.icon} />
         </Fab>
-        <Weather open={weatherOpen} handleClose={handleWeatherClose}/>
+        <Weather open={weatherOpen} handleClose={handleWeatherClose} />
       </Hidden>
     </Box>
   );
 }
 
+// displays error message when limit is reached or if any other error occured
 function NewsError({ error }) {
+  if (error.response.status === 429) {
+    return (
+      <>
+        <div>API limit reached.</div>
+      </>
+    );
+  }
   return <div>Something went wrong. </div>;
 }

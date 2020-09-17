@@ -133,7 +133,15 @@ function CitySearch({ classes }) {
   return (
     <Box display="flex" justifyContent="space-around">
       <Box p={4}>
-        <img src={sunIcon} alt="sun icon" className={classes.sunIcon} />
+        {cityWeatherStatus === "success" && cityWeatherData.cod === 200 ? (
+          <img
+            src={`http://openweathermap.org/img/w/${cityWeatherData.weather[0].icon}.png`}
+            alt="weather state"
+            className={classes.weatherIcon}
+          />
+        ) : (
+          <img src={sunIcon} alt="sun icon" className={classes.sunIcon} />
+        )}
       </Box>
       <Box display="flex" alignItems="center" p={4}>
         <Box display="flex" flexDirection="column">
@@ -154,7 +162,7 @@ function CitySearch({ classes }) {
           {cityWeatherStatus === "success" &&
             (cityWeatherData.cod === 200 ? (
               <Box>
-                <Box display="flex" mb={2}>
+                <Box display="flex" my={2}>
                   <SvgIcon>
                     <LocationOnIcon />
                   </SvgIcon>{" "}
