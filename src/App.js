@@ -15,14 +15,16 @@ function App() {
 
   const queryCache = new QueryCache();
 
+  const [search, setSearch] = useState('');
+  console.log('search in app :>> ', search);
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <ReactQueryCacheProvider queryCache={queryCache}>
           <Container maxWidth="md">
-            <Header />
-            <Content />
+            <Header setSearch={setSearch}/>
+            <Content search={search}/>
           </Container>
           <ReactQueryDevtools />
         </ReactQueryCacheProvider>

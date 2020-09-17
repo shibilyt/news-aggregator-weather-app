@@ -7,6 +7,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Button from "@material-ui/core/Button";
 import { Typography } from "@material-ui/core";
 import Weather from "./Weather";
+import SearchInput from "./SearchInput";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -22,17 +23,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-export default function Header() {
+export default function Header({ setSearch }) {
   const classes = useStyles();
 
   const [weatherOpen, setWeatherOpen] = useState(false);
-  
-  function handleWeatherOpen(){
+
+  function handleWeatherOpen() {
     setWeatherOpen(true);
   }
-  
-  function handleWeatherClose(){
+
+  function handleWeatherClose() {
     setWeatherOpen(false);
   }
 
@@ -40,22 +40,17 @@ export default function Header() {
     <AppBar className={classes.appBar}>
       <Toolbar className={classes.toolbar}>
         <img src={logo} alt="The beautiful SNW log" />
-        <div className={classes.linkSection}>
-          <NavLink url={"#"} label="Popular" />
-          <NavLink url={"#"} label="Latest" />
-          <NavLink url={"#"} label="Random" />
+        <SearchInput setSearch={setSearch} />
 
-          <Button variant="contained" color="primary" onClick={handleWeatherOpen}>
-            Current Weather
-          </Button>
+        <Button variant="contained" color="primary" onClick={handleWeatherOpen}>
+          Current Weather
+        </Button>
 
-          <Weather open={weatherOpen} handleClose={handleWeatherClose}/>
-        </div>
+        <Weather open={weatherOpen} handleClose={handleWeatherClose} />
       </Toolbar>
     </AppBar>
   );
 }
-
 
 // NavLink component
 const useNavStyles = makeStyles({

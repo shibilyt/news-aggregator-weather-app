@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   input: {},
 }));
 
-export default function Filter({ lang, search, setLang, setSearch }) {
+export default function Filter({ lang, setLang}) {
   const classes = useStyles();
 
   const languages = [
@@ -56,6 +56,7 @@ export default function Filter({ lang, search, setLang, setSearch }) {
             id="language"
             value={lang}
             variant="outlined"
+            margin='dense'
             onChange={(e) => {
               setLang(e.target.value);
             }}
@@ -70,27 +71,13 @@ export default function Filter({ lang, search, setLang, setSearch }) {
               },
             }}
           >
+            <MenuItem value={"all"}>All</MenuItem>
             {languages.map((language) => (
               <MenuItem value={language.value}>{language.label}</MenuItem>
             ))}
           </Select>
         </FormControl>
 
-        <TextField
-          className={classes.input}
-          variant="outlined"
-          placeholder="Search News"
-          inputProps={{ "aria-label": "search news" }}
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <IconButton
-          type="submit"
-          className={classes.iconButton}
-          aria-label="search"
-        >
-          <SearchIcon />
-        </IconButton>
       </Box>
     </div>
   );
