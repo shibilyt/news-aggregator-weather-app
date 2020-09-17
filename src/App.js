@@ -4,7 +4,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import "./App.css";
 import Header from "./components/Header";
-import Weather from "./components/Weather";
 import theme, { darkTheme } from "./theme";
 
 import { ReactQueryDevtools } from "react-query-devtools";
@@ -24,7 +23,7 @@ function App() {
         <ReactQueryCacheProvider queryCache={queryCache}>
           <Container maxWidth="md">
             <Header setSearch={setSearch}/>
-            <Content search={search}/>
+            <Content search={search} setSearch={setSearch}/>
           </Container>
           <ReactQueryDevtools />
         </ReactQueryCacheProvider>

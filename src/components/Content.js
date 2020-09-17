@@ -5,13 +5,13 @@ import useNews from "../hooks/useNews";
 import NewsCard from "./NewsCard";
 import CardSkeleton from "./CardSkeleton";
 
-export default function Content({search =""}) {
+export default function Content({search ="", setSearch}) {
   const [lang, setLang] = useState("all");
   const { status, data, error } = useNews(lang, search);
   console.log("news data :>> ", data);
   return (
     <Box mt={8} p={3}>
-      <Filter lang={lang} setLang={setLang} />
+      <Filter lang={lang} setLang={setLang} search={search} setSearch={setSearch}/>
       {status === "loading" && (
         <>
           <CardSkeleton />

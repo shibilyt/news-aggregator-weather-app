@@ -4,11 +4,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Box from "@material-ui/core/Box";
-import InputBase from "@material-ui/core/InputBase";
-import IconButton from "@material-ui/core/IconButton";
-import SearchIcon from "@material-ui/icons/Search";
+import Chip from "@material-ui/core/Chip";
 import { makeStyles } from "@material-ui/core/styles";
-import { TextField } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -18,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   input: {},
 }));
 
-export default function Filter({ lang, setLang}) {
+export default function Filter({ lang, setLang, search, setSearch }) {
   const classes = useStyles();
 
   const languages = [
@@ -56,7 +53,7 @@ export default function Filter({ lang, setLang}) {
             id="language"
             value={lang}
             variant="outlined"
-            margin='dense'
+            margin="dense"
             onChange={(e) => {
               setLang(e.target.value);
             }}
@@ -77,8 +74,8 @@ export default function Filter({ lang, setLang}) {
             ))}
           </Select>
         </FormControl>
-
       </Box>
+      {search !== "" ? <Box py={3}>Showing results for : <Chip color="secondary" label={search} onDelete={() => setSearch("")}/> </Box>: null}
     </div>
   );
 }

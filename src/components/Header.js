@@ -52,22 +52,3 @@ export default function Header({ setSearch }) {
   );
 }
 
-// NavLink component
-const useNavStyles = makeStyles({
-  link: {
-    textDecoration: "none",
-    color: "#fefefe",
-    padding: "0 20px",
-  },
-});
-
-function NavLink({ url, label }) {
-  const classes = useNavStyles();
-  return (
-    <Typography variant="subtitle2">
-      <a href={url} className={classes.link}>
-        {label}
-      </a>
-    </Typography>
-  );
-}
