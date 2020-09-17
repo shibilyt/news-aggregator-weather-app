@@ -57,7 +57,7 @@ export default function Header({
             color="primary"
             onClick={handleWeatherOpen}
           >
-            Current Weather
+            Weather
           </Button>
         </Hidden>
 

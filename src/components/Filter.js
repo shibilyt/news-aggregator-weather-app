@@ -44,7 +44,7 @@ export default function Filter({ lang, setLang, search, setSearch }) {
   ];
 
   return (
-    <div>
+    <Box mb={2}>
       <Box display="flex" alignItems="center">
         <InputLabel id="language">language</InputLabel>
         <FormControl className={classes.formControl}>
@@ -76,6 +76,6 @@ export default function Filter({ lang, setLang, search, setSearch }) {
         </FormControl>
       </Box>
       {search !== "" ? <Box py={3}>Showing results for : <Chip color="secondary" label={search} onDelete={() => setSearch("")}/> </Box>: null}
-    </div>
+    </Box>
   );
 }

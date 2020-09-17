@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     marginRight: 10,
+    [theme.breakpoints.down("sm")]: {
+      marginTop: 10,
+    },
   },
   image: {
     width: "100%",
@@ -42,6 +45,10 @@ const useStyles = makeStyles((theme) => ({
       width: "100%",
       height: 300,
     },
+    [theme.breakpoints.up("md")]: {
+      width: 120,
+      height: 120,
+    },
   },
 }));
 
@@ -51,7 +58,12 @@ export default function NewsCard({ data }) {
   return (
     <Card className={classes.card}>
       <header>
-        <a className={classes.newsTitle} href={data.source.url || data.url}>
+        <a
+          className={classes.newsTitle}
+          href={data.source.url || data.url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Typography variant="h6">{data.title}</Typography>
         </a>
         <div className={classes.publicationDetails}>
@@ -59,6 +71,8 @@ export default function NewsCard({ data }) {
             <a
               className={classes.newsSource}
               href={data.source.url || data.url}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               {data.source.name}
             </a>

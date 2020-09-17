@@ -3,7 +3,6 @@ import axios from "axios";
 
 export default function useNews(lang, search){                           
 
-    console.log('lang, search', lang, !search, search);
     function fetchNews(key, {lang, search}) {
         if(lang === "all" && !search){
             // return axios.get(`https://gnews.io/api/v4/top-headlines?token=${process.env.REACT_APP_API_KEY}`)
