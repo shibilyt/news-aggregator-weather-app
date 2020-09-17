@@ -3,10 +3,12 @@ import Card from "@material-ui/core/Card";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 const useStyles = makeStyles((theme) => ({
   card: {
     padding: 20,
+    marginBottom: 20,
   },
   newsTitle: {
     fontSize: 25,
@@ -24,7 +26,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   image:{
-    maxWidth: '25%'
+    maxWidth: 120,
+    maxHeight: 120,
+    objectFit: ''
   }
 }));
 
@@ -34,10 +38,10 @@ export default function NewsCard({data}) {
   return (
     <Card className={classes.card}>
       <header>
-        <Typography variant="h5">{data.title}</Typography>
+        <Typography variant="h6">{data.title}</Typography>
         <div className={classes.publicationDetails}>
           <Typography variant="subtitle1">
-            <a className={classes.newsSource} href={data.source.url}>
+            <a className={classes.newsSource} href={data.source.url || data.url}>
               {data.source.name}
             </a>
           </Typography>
@@ -45,8 +49,8 @@ export default function NewsCard({data}) {
         </div>
       </header>
       <div className={classes.body}>
-        <Typography variant="body1">{data.content}</Typography>
-        <img src={data.image} alt="news topic" className={classes.image} />
+        <Typography variant="body1">{data.description}</Typography>
+        <img src={data.image || data.urlToImage} alt="news topic" className={classes.image} />
       </div>
     </Card>
   );
