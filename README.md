@@ -29,7 +29,8 @@ theming and style system was set up in material theming system. Only a basic the
 
 
 
---- Create React App info
+------
+Create React App info
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
