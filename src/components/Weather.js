@@ -1,35 +1,76 @@
-import React, { useState } from 'react';
-import Card from '@material-ui/core/Card';
-import Typography  from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import {useQuery} from 'react-query';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import Dialog from "@material-ui/core/Dialog";
 
-import sunIcon from '../assets/sun-icon.svg'
+import sunIcon from "../assets/sun-icon.svg";
+import useWeather from "../hooks/useWeather";
+import { usePosition } from "../hooks/usePosition";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
-import useWeather from '../hooks/useWeather';
+const useStyles = makeStyles({
+  paper: {
+    padding: 20,
+  },
+  header: {
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  closeButton:{
+      position: 'absolute',
+      top: 10,
+      right: 10
+  },
+  weatherIcon: {
+    width: 120,
+  },
+});
 
-export default function Weather({lat, lon}){
+export default function Weather({ open , handleClose }) {
+  const classes = useStyles();
+  const { latitude, longitude } = usePosition();
+  const { status, data } = useWeather(latitude, longitude);
 
-    const {status, data} = useWeather(lat, lon)
+  return (
+    <Dialog open={open} classes={{ paper: classes.paper }}>
+      <DialogTitle>
+        <Typography variant="h6" className={classes.header}>
+          Weather
+        </Typography>
+        <IconButton className={classes.closeButton} onClick={handleClose}>
+            <CloseIcon/>
+        </IconButton>
+      </DialogTitle>
 
-    console.log('data :>> ', data);
-
-    return (
-        <Card>
-            <header>
-                <Typography>Weather</Typography>
-
-                <Box display='flex' justifyContent='space-around'>
-                    <img src={sunIcon} alt="sun icon"/>
-                    <Box>
-                        {status === 'success' && (
-                            data.cod === 200 ? (
-                            <Typography variant='body1'>It's currently {data.main.temp - 273.15}℃ out there with {data.weather[0].description} </Typography>
-                            ): null
-                        )}
-                    </Box>
-                </Box>
-            </header>
-        </Card>
-    )
+      <Box display="flex" justifyContent="space-around">
+        <Box p={4}>
+          {/* <img src={sunIcon} alt="sun icon" className={classes.sunIcon}/> */}
+          {status === "success" &&
+            (data.cod === 200 ? (
+              <img
+                src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`}
+                alt="weather state"
+                className={classes.weatherIcon}
+              />
+            ) : (
+              <img src={sunIcon} alt="sun icon" className={classes.sunIcon} />
+            ))}
+        </Box>
+        <Box display="flex" alignItems="center" p={4}>
+          {status === "success" &&
+            (data.cod === 200 ? (
+              <>
+                <Typography variant="body1">
+                  It's currently {data.main.temp - 273.15}℃ out there with{" "}
+                  {data.weather[0].description}
+                </Typography>
+              </>
+            ) : null)}
+        </Box>
+      </Box>
+    </Dialog>
+  );
 }

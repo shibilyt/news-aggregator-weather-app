@@ -9,11 +9,9 @@ import theme, { darkTheme } from "./theme";
 
 import { ReactQueryDevtools } from "react-query-devtools";
 import { QueryCache, ReactQueryCacheProvider } from "react-query";
-import { usePosition } from "./hooks/usePosition";
 import Content from "./components/Content";
 
 function App() {
-  const { latitude, longitude } = usePosition();
 
   const queryCache = new QueryCache();
 
@@ -25,7 +23,6 @@ function App() {
           <Container maxWidth="md">
             <Header />
             <Content />
-            <Weather lat={latitude} lon={longitude} />
           </Container>
           <ReactQueryDevtools />
         </ReactQueryCacheProvider>

@@ -49,6 +49,13 @@ let theme = createMuiTheme({
     subtitle1: {
         fontSize: 16,
         fontFamily: 'Merriweather',
+    },
+    subtitle2: {
+        fontSize: 16,
+        fontFamily: 'Montserrat',
+    },
+    button: {
+        fontFamily: 'Montserrat'
     }
   },
 });
